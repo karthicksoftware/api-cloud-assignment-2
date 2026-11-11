@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # RetailAssist
 
 A fully local e-commerce customer-service copilot for AIMLZG 549 Assignment II. The fictional retailer is **DemoMart**. Streamlit calls a FastAPI backend for intent classification, sentiment analysis, ticket summarization and policy-grounded chat. An agent reviews every draft; the application cannot perform transactions or access live customer records.
@@ -128,3 +129,7 @@ Both report and video are compulsory. Use **12 November 2026** as the conservati
 ## Attribution
 
 Bitext dataset: **CDLA-Sharing-1.0**, [dataset card](https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset). Preserve its license and attribution when sharing data or derivatives. DistilBERT and MiniLM: Apache-2.0. Qwen2.5 7B: Apache-2.0. CardiffNLP sentiment model: CC-BY-4.0; credit Cardiff NLP and the TimeLMs authors using the [model card](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest). Downloaded runtime/model documentation retains its upstream notices. The .example support address is fictional and does not receive messages.
+=======
+# api-cloud-assignment-2
+API Cloud Assignment 2 - MTech AIML Semester - 3
+>>>>>>> b386892b6ca1bac8a2fd88ac8eea6d5acb4701f6
