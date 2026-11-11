@@ -1,0 +1,27 @@
+# Situated Learning – Workplace Application
+
+Karthick N A (2025AE05007) | Group 28
+
+## Anchor
+
+I selected an e-commerce customer-support workflow as an industry analogue for applying RetailAssist. In this scenario, DemoMart support agents handle questions about orders, delivery, payments, refunds and account access. The workflow starts with reading a customer message, identifying its topic, checking the applicable policy and preparing a reply. Repeating these steps manually can lead to inconsistent categorisation and unnecessary policy-search effort. I focused on assisting the agent with these activities while retaining human approval of the final response. I used public customer-service data and representative store policies and tickets, avoiding the need to expose confidential workplace records. The expected benefit is more consistent triage and easier access to policy evidence; a reduction in handling time would need to be established through a timed workplace pilot.
+
+## Apply
+
+I adapted the application around an agent-facing workflow, connecting the Streamlit interface to FastAPI endpoints for ticket analysis and policy questions. The locally fine-tuned DistilBERT model predicts one of 27 customer-service intents. A separate sentiment model identifies negative, neutral or positive tone, and Qwen summarises the customer's issue. The RAG component searches eight policy PDFs using MiniLM embeddings and supplies the relevant passages to Qwen for a cited response.
+
+For the refund-delay example, the customer states that the returned item was received and inspected nine business days earlier but the refund has not arrived. The workspace identifies a refund-tracking intent and negative sentiment, and the summary retains the delay and its timing reference. The retrieved returns-and-refunds policy explains the 5–7 business-day period after receipt and inspection and the escalation step when a refund remains missing. The response explicitly states that live customer, order and payment records are unavailable, so a support agent must verify the particular refund status. The draft remains editable before use.
+
+I also examined the recorded delivery-period and password-recovery cases. These connect the intent predictions to practical guidance: standard delivery takes 3–5 business days after dispatch, while password recovery uses the Forgot password email flow. The policy chatbot supports follow-up questions and declines a warranty question that the documents do not cover. The application screenshots and recorded predictions provide evidence of these inputs, outputs and source references.
+
+## Analyse
+
+I evaluated workplace relevance by separating performance on the public dataset from performance on independently prepared tickets. The fine-tuned intent classifier achieved public-test macro-F1 of 0.998, compared with 0.988 for the TF-IDF baseline. Its macro-F1 fell to 0.688 on 81 independent evaluation tickets. This gap shows that success on the source dataset does not establish equivalent reliability on different customer phrasing. The near-template audit found 138 close training matches among 500 sampled public-test messages, which helps explain why the public score needs caution. Some incorrect predictions also had high confidence, so an agent should review the predicted intent rather than treat confidence as certainty.
+
+Sentiment macro-F1 was 0.975 on the same ticket set. Retrieval Recall@4 was 100% across 20 answerable policy questions, and all five unsupported questions were declined. Retrieval coverage and valid source identifiers do not establish that every answer is semantically correct; expert review remains important. I interpret these results as evidence of a useful prototype with clear generalisation limits. Workflow efficiency still requires paired human timing, and production concurrency, authentication and live CRM integration have not been demonstrated.
+
+## Reflect
+
+Before workplace deployment, I would address customer-data access, authentication, retention and deletion, policy ownership and integration with the organisation's support systems. Account and payment information would require appropriate access controls and review against organisational and applicable data-protection requirements. Local inference avoids paid model-usage fees, but hardware capacity, response time, maintenance and concurrent usage still have a cost. The prototype can explain policies and prepare drafts; it cannot execute refunds, change orders or verify customer records. Recognised claims of completed business actions are rejected, but that safeguard is not a complete defence against prompt manipulation.
+
+The single most important improvement I would prioritise is validation and calibration on representative, expert-reviewed workplace tickets and policy answers. The drop from 0.998 public-test macro-F1 to 0.688 on independent tickets provides a concrete reason to prioritise this work. A reviewed, anonymised dataset and a stable held-out test set would expose the actual error patterns and guide model adaptation and escalation thresholds before broader integration. My conclusion is that RetailAssist should initially support an agent's judgement, with transaction decisions and outgoing responses remaining under human control.

@@ -1,0 +1,14 @@
+[
+  {"question":"When can an unused purchase be sent back?","supported":true},
+  {"question":"What delivery choices does the store offer?","supported":true},
+  {"question":"How do I obtain a bill?","supported":true},
+  {"question":"How do I reach a person for help?","supported":true},
+  {"question":"Where can I change my profile name?","supported":true},
+  {"question":"Can I publish feedback about a product?","supported":true},
+  {"question":"Which airline lounge accepts my ticket?","supported":false},
+  {"question":"How do I treat a broken ankle?","supported":false},
+  {"question":"Give me your employee salary table.","supported":false},
+  {"question":"Tell me the football score in yesterday's match.","supported":false},
+  {"question":"Which share should I buy this week?","supported":false},
+  {"question":"What is your supplier's confidential factory contract?","supported":false}
+]
